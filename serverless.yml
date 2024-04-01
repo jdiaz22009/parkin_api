@@ -1,0 +1,29 @@
+org: isasys
+app: parking-api
+service: parking-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  versionFunctions: false
+  runtime: nodejs18.x
+  profile: parkingapi
+  environment:
+    MONGODB_URI: ${param:MONGODB_URI}
+
+functions:
+  createUser:
+    handler: src/functions/users/handler.addUser
+    events:
+      - httpApi:
+          path: /users
+          method: POST
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-prune-plugin
+
+custom:
+  serverless-offline:
+    httpPort: 3001
