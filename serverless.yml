@@ -18,6 +18,12 @@ functions:
       - httpApi:
           path: /users
           method: POST
+  getParkings:
+    handler: src/functions/parkings/handler.getParking
+    events:
+      - httpApi:
+          path: /parkings
+          method: GET
 
 plugins:
   - serverless-plugin-typescript
